@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfdyd3ujnewki"]
+
+[ext_resource type="Script" uid="uid://cvs8318eb26rw" path="res://Scripts/world.gd" id="1_5ukr8"]
+[ext_resource type="PackedScene" uid="uid://ekkrlepxuagx" path="res://Scenes/player1.tscn" id="1_a02cp"]
+[ext_resource type="Texture2D" uid="uid://b165gspfvp602" path="res://Assets/separator.png" id="2_go701"]
+[ext_resource type="PackedScene" uid="uid://5yjk3fsmfqvq" path="res://Scenes/player2.tscn" id="3_5a7ea"]
+[ext_resource type="PackedScene" uid="uid://byjh0tuc2agf7" path="res://Scenes/ball.tscn" id="5_fo5ed"]
+[ext_resource type="Script" uid="uid://dm6hnk71t4fkt" path="res://Scripts/ball.gd" id="6_5ukr8"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_5ukr8")
+
+[node name="Player1" parent="." instance=ExtResource("1_a02cp")]
+position = Vector2(20, 70)
+
+[node name="Separator" type="Sprite2D" parent="."]
+position = Vector2(320, 200)
+texture = ExtResource("2_go701")
+
+[node name="Player2" parent="." instance=ExtResource("3_5a7ea")]
+position = Vector2(620, 330)
+
+[node name="Ball" parent="." instance=ExtResource("5_fo5ed")]
+position = Vector2(320, 200)
+script = ExtResource("6_5ukr8")
+
+[node name="StartTimer" type="Timer" parent="."]
+
+[connection signal="p1_hit" from="Player1" to="." method="on_p1_hit"]
+[connection signal="p2_hit" from="Player2" to="." method="on_p2_hit"]
+[connection signal="edge_hit" from="Ball" to="." method="edge_hit"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ekkrlepxuagx"]
+
+[ext_resource type="Script" uid="uid://kn4m4npsv33v" path="res://Scripts/player_1.gd" id="1_ndhuy"]
+[ext_resource type="Texture2D" uid="uid://biauf4j73g4o" path="res://Assets/left_pallete.png" id="1_v0iea"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
+size = Vector2(14, 58)
+
+[node name="Player1" type="Area2D"]
+script = ExtResource("1_ndhuy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("1_v0iea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cvnsp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
