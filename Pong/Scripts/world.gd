@@ -10,6 +10,7 @@ extends Node2D
 
 var rng = RandomNumberGenerator.new()
 var time_start = 0
+var game_started = 0
 
 var p1_score = 0
 var p2_score = 0
@@ -24,11 +25,15 @@ func _ready():
 	hud.hide()
 	separator.hide()
 
-func _on_menu_start_game() -> void:
+func _process(delta: float) -> void:
+	if Input.is_key_pressed(KEY_R):
+		get_tree().reload_current_scene()
+
+func _on_menu_start_game(mode) -> void:
 	start_timer.start()
 	separator.hide()
-	player_1.game_started = true
-	player_2.game_started = true
+	game_started = true
+	player_2.mode = mode
 	ball.show()
 	hud.show()
 	hud.show_message("0 - 0", "GET READY")
@@ -47,22 +52,21 @@ func _on_player_scored(player):
 		p1_score += 1
 	else:
 		p2_score += 1
-	if p1_score == 5 or p2_score == 5:
+	if p1_score >= 5 or p2_score >= 5:
 		game_over()
-		return
-
-	time_start = Time.get_unix_time_from_system()
-	ball.reset()
-	separator.hide()
-	start_timer.start()
-	hud.show_message("%s - %s" % [p1_score, p2_score], "GET READY", false)
+		ball.reset()
+	else:
+		time_start = Time.get_unix_time_from_system()
+		ball.reset()
+		separator.hide()
+		start_timer.start()
+		hud.show_message("%s - %s" % [p1_score, p2_score], "GET READY", false)
 
 func _on_start_timer_timeout() -> void:
 	ball.start(recent_player_win * 2 - 3)
 	if recent_player_win == 2:
-		ai_start = true
+		player_2.computer_start = true
 
 func game_over() -> void:
-	player_1.game_started = false
-	player_2.game_started = false
+	game_started = false
 	hud.show_message("%s - %s" % [p1_score, p2_score], "GAME OVER", true)
