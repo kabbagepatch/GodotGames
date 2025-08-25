@@ -5,12 +5,15 @@ signal p1_hit
 @export var speed = 400
 var screen_size
 var y_limit = 30
+@export var game_started = false
 
 func _ready():
 	screen_size = get_viewport_rect().size
 
 func _process(delta):
-	var velocity = Vector2.ZERO # The player's movement vector.
+	if !game_started:
+		return
+	var velocity = Vector2.ZERO
 	
 	if Input.is_action_pressed("player_one_move_down"):
 		velocity.y += 1

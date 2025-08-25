@@ -2,7 +2,7 @@ extends Node2D
 
 signal player_scored
 
-@export var speed = 400
+@export var speed = 300
 var screen_size
 @export var velocity = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
@@ -21,7 +21,7 @@ func _process(delta):
 	elif position.x <= 0:
 		player_scored.emit(2)
 
-	var normalized_velocity = velocity.normalized() * speed
+	var normalized_velocity = velocity * speed
 
 	position += normalized_velocity * delta
 	position = position.clamp(Vector2.ZERO, Vector2(screen_size.x, screen_size.y))

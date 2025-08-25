@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfdyd3ujnewki"]
+[gd_scene load_steps=9 format=3 uid="uid://cfdyd3ujnewki"]
 
 [ext_resource type="Script" uid="uid://cvs8318eb26rw" path="res://Scripts/world.gd" id="1_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://ekkrlepxuagx" path="res://Scenes/player1.tscn" id="1_a02cp"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://byjh0tuc2agf7" path="res://Scenes/ball.tscn" id="5_fo5ed"]
 [ext_resource type="Script" uid="uid://dm6hnk71t4fkt" path="res://Scripts/ball.gd" id="6_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://b0wqls4ojf7iw" path="res://Scenes/HUD.tscn" id="7_o06y3"]
+[ext_resource type="PackedScene" uid="uid://bmmm7hdnqflfv" path="res://Scenes/menu.tscn" id="8_k7acu"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_5ukr8")
@@ -31,7 +32,15 @@ one_shot = true
 
 [node name="HUD" parent="." instance=ExtResource("7_o06y3")]
 
+[node name="Menu" parent="." instance=ExtResource("8_k7acu")]
+offset_left = 319.0
+offset_top = 202.0
+offset_right = 319.0
+offset_bottom = 202.0
+
 [connection signal="p1_hit" from="Player1" to="." method="_on_p1_hit"]
+[connection signal="p1_hit" from="Player1" to="Player2" method="_on_player_1_p_1_hit"]
 [connection signal="p2_hit" from="Player2" to="." method="_on_p2_hit"]
 [connection signal="player_scored" from="Ball" to="." method="_on_player_scored"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="start_game" from="Menu" to="." method="_on_menu_start_game"]
