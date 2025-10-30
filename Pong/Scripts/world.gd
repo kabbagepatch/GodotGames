@@ -54,13 +54,13 @@ func _on_player_scored(player):
 		p2_score += 1
 	if p1_score >= 5 or p2_score >= 5:
 		game_over()
-		ball.reset()
 	else:
 		time_start = Time.get_unix_time_from_system()
-		ball.reset()
-		separator.hide()
 		start_timer.start()
 		hud.show_message("%s - %s" % [p1_score, p2_score], "GET READY", false)
+
+	ball.reset()
+	separator.hide()
 
 func _on_start_timer_timeout() -> void:
 	ball.start(recent_player_win * 2 - 3)

@@ -58,4 +58,3 @@ func _on_player_1_p_1_hit() -> void:
 	elif mode == "HARD":
 		computer_velocity = rng.randf_range(0.6, 1)
 		computer_threshold = rng.randf_range(15, 25)
-	print(computer_velocity, ", ", computer_threshold)
