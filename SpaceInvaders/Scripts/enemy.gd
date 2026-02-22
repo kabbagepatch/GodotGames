@@ -1,4 +1,6 @@
 extends Area2D
+class_name Enemy
+signal killed(score)
 
 @onready var movement_timer: Timer = $MovementTimer
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -12,6 +14,8 @@ const HEIGHT = 50
 
 @export var speed = 400
 @export var column_n = 0
+@export var score = 0
+@export var game_over = 0
 var can_shoot = true
 
 var screen_size
@@ -25,6 +29,8 @@ func _ready():
 	movement_timer.timeout.connect(move_invaders)
 
 func move_invaders():
+	if game_over: return
+
 	if position.x > screen_size.x  - (COLS - column_n) * WIDTH + WIDTH / 2 && !gone_down:
 		direction = 'L'
 		go_down = true
@@ -45,5 +51,6 @@ func move_invaders():
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Laser:
+		emit_signal("killed", score);
 		area.queue_free()
 		queue_free()

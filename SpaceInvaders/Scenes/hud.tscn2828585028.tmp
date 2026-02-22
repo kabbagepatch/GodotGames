@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dfntkb6231elb"]
+
+[ext_resource type="Script" uid="uid://6eew4i52vyqe" path="res://Scripts/hud.gd" id="1_e0onf"]
+
+[node name="HUD" type="CanvasLayer" unique_id=2048825314]
+script = ExtResource("1_e0onf")
+
+[node name="Message" type="Label" parent="." unique_id=1016102851]
+offset_left = 400.0
+offset_top = 259.0
+offset_right = 766.0
+offset_bottom = 347.0
+theme_override_font_sizes/font_size = 64
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="." unique_id=1827269886]
+offset_left = 8.0
+offset_top = -4.0
+offset_right = 91.0
+offset_bottom = 61.0
+theme_override_font_sizes/font_size = 40
+text = "0"
+vertical_alignment = 1

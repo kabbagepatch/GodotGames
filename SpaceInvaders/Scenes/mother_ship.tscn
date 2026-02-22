@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c3ifr24b6v8ve"]
+
+[ext_resource type="Texture2D" uid="uid://r5imkdignbjf" path="res://Assets/Ufo/Ufo.png" id="1_55bxm"]
+[ext_resource type="Script" uid="uid://y3fuemp8qh47" path="res://Scripts/mother_ship.gd" id="2_shush"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shush"]
+size = Vector2(16, 6)
+
+[node name="MotherShip" type="Area2D" unique_id=241914707]
+script = ExtResource("2_shush")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=658761046]
+texture_filter = 1
+texture = ExtResource("1_55bxm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1583416015]
+shape = SubResource("RectangleShape2D_shush")
+
+[node name="MotherShipShotTimer" type="Timer" parent="." unique_id=1835563185]
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="MotherShipShotTimer" to="." method="_on_mother_ship_shot_timer_timeout"]

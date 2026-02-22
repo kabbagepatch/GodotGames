@@ -21,7 +21,7 @@ texture = ExtResource("1_v0iea")
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_6t5aa")
 
-[node name="Shooting" type="Node" parent="." unique_id=526225873]
+[node name="LaserShot" type="Node" parent="." unique_id=526225873]
 script = ExtResource("3_6t5aa")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
