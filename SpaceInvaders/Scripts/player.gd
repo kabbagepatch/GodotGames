@@ -20,3 +20,8 @@ func _process(delta):
 	
 	position += velocity * delta
 	position = position.clamp(Vector2(x_limit, 0), Vector2(screen_size.x - x_limit, screen_size.y))
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is Rocket:
+		area.queue_free()
+		queue_free()

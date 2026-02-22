@@ -1,23 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://y2e4u0w6beq2"]
+[gd_scene format=3 uid="uid://y2e4u0w6beq2"]
 
 [ext_resource type="Script" uid="uid://236b7nugbgok" path="res://Scripts/enemy.gd" id="1_1f0kj"]
-[ext_resource type="Texture2D" uid="uid://cp8wb5v43v6qj" path="res://Assets/Invaders/Octopus-1.png" id="2_1f0kj"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hghv2"]
+load_path = "res://.godot/imported/Octopus-1.png-029b4bf7f64da358272d54e6c67fb390.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hghv2"]
-size = Vector2(12, 8)
+size = Vector2(10, 8)
 
-[node name="Enemy" type="Area2D"]
+[sub_resource type="GDScript" id="GDScript_hghv2"]
+script/source = "extends Node
+
+const ROCKET_SCENE = preload(\"res://Scenes/rocket.tscn\")
+
+var can_shoot = true
+func shoot():
+	if Input.is_action_pressed(\"shoot\") and can_shoot:
+		can_shoot = false
+		var rocket = ROCKET_SCENE.instantiate() as Area2D
+		rocket.global_position = get_parent().global_position - Vector2(0, 20)
+		rocket.scale = Vector2(4, 4)
+		get_tree().root.get_node(\"World\").add_child(rocket)
+		rocket.tree_exited.connect(on_laser_destroyed)
+
+func on_laser_destroyed():
+	can_shoot = true
+"
+
+[node name="Enemy" type="Area2D" unique_id=793743641]
 script = ExtResource("1_1f0kj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1001070544]
 texture_filter = 1
-texture = ExtResource("2_1f0kj")
+texture = SubResource("CompressedTexture2D_hghv2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=864430226]
 shape = SubResource("RectangleShape2D_hghv2")
 
-[node name="MovementTimer" type="Timer" parent="."]
-wait_time = 0.5
+[node name="MovementTimer" type="Timer" parent="." unique_id=1135554550]
+wait_time = 0.4
 autostart = true
+
+[node name="EnemyShot" type="Node" parent="." unique_id=622047740]
+script = SubResource("GDScript_hghv2")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

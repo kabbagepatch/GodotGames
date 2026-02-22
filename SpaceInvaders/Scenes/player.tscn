@@ -1,18 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://shhf3gjiorch"]
+[gd_scene format=3 uid="uid://shhf3gjiorch"]
 
 [ext_resource type="Script" uid="uid://bbpjwahm6sc67" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://7thdeskrquo" path="res://Assets/Player/Player.png" id="1_v0iea"]
-[ext_resource type="Script" uid="uid://bwxjbcfwq2grm" path="res://Scripts/shooting.gd" id="3_6t5aa"]
+[ext_resource type="Script" uid="uid://bwxjbcfwq2grm" path="res://Scripts/laser_shot.gd" id="3_6t5aa"]
 
-[node name="Player" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6t5aa"]
+size = Vector2(12, 6)
+
+[node name="Player" type="Area2D" unique_id=1434354619]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_cvnsp")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=614266077]
 texture_filter = 1
 scale = Vector2(1.00961, 1.00001)
 texture = ExtResource("1_v0iea")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=486791587]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_6t5aa")
 
-[node name="Shooting" type="Node" parent="."]
+[node name="Shooting" type="Node" parent="." unique_id=526225873]
 script = ExtResource("3_6t5aa")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://b84ya4uy03iqg"]
+[gd_scene format=3 uid="uid://b84ya4uy03iqg"]
 
 [ext_resource type="Script" uid="uid://c2xdgcknr8ygy" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://shhf3gjiorch" path="res://Scenes/player.tscn" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://dfntkb6231elb" path="res://Scenes/hud.tscn" id="3_8gbba"]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" unique_id=684761321]
 script = ExtResource("1_8gbba")
 
-[node name="Player" parent="." instance=ExtResource("1_jjgbg")]
+[node name="Player" parent="." unique_id=1804563410 instance=ExtResource("1_jjgbg")]
 position = Vector2(576, 620)
 scale = Vector2(4, 4)
+
+[node name="HUD" parent="." unique_id=2048825314 instance=ExtResource("3_8gbba")]
+
+[node name="EnemyShotTimer" type="Timer" parent="." unique_id=714279839]
+wait_time = 2.0
+autostart = true

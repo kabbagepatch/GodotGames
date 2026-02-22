@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://u80p430mi2vi"]
+
+[ext_resource type="Script" uid="uid://c7rgbohq8xp6o" path="res://Scripts/enemy_rocket.gd" id="1_kvp10"]
+[ext_resource type="Texture2D" uid="uid://xc0vsutvflke" path="res://Assets/Weapons/Rocket.png" id="2_hthiq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mou6w"]
+size = Vector2(4, 24)
+
+[node name="Rocket" type="Area2D" unique_id=223355257]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_kvp10")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=874985677]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("2_hthiq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=679849023]
+shape = SubResource("RectangleShape2D_mou6w")
