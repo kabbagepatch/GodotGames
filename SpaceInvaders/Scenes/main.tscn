@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c2xdgcknr8ygy" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://shhf3gjiorch" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://dfntkb6231elb" path="res://Scenes/hud.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://60fv8w6ota5j" path="res://Scenes/barrier.tscn" id="4_jjvhh"]
 
 [node name="World" type="Node2D" unique_id=684761321]
 script = ExtResource("1_8gbba")
@@ -23,6 +24,26 @@ one_shot = true
 [node name="MotherShipTimer" type="Timer" parent="." unique_id=636851443]
 wait_time = 15.0
 autostart = true
+
+[node name="Barrier" parent="." unique_id=1250064897 instance=ExtResource("4_jjvhh")]
+texture_filter = 1
+position = Vector2(145, 550)
+scale = Vector2(4, 4)
+
+[node name="Barrier2" parent="." unique_id=1799313884 instance=ExtResource("4_jjvhh")]
+texture_filter = 1
+position = Vector2(726, 550)
+scale = Vector2(4, 4)
+
+[node name="Barrier3" parent="." unique_id=1828882752 instance=ExtResource("4_jjvhh")]
+texture_filter = 1
+position = Vector2(432, 551)
+scale = Vector2(4, 4)
+
+[node name="Barrier4" parent="." unique_id=125395673 instance=ExtResource("4_jjvhh")]
+texture_filter = 1
+position = Vector2(1017, 550)
+scale = Vector2(4, 4)
 
 [connection signal="killed" from="Player" to="." method="_on_player_killed"]
 [connection signal="timeout" from="EnemyShotTimer" to="." method="_on_enemy_shot_timer_timeout"]

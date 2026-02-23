@@ -39,7 +39,7 @@ func move_invaders():
 		go_down = true
 
 	if go_down:
-		position.y += 20
+		position.y += 40
 		go_down = false
 		gone_down = true
 	else:
