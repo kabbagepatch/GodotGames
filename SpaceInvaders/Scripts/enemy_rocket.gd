@@ -12,3 +12,8 @@ func _process(delta):
 		queue_free()
 	
 	position.y += delta * speed
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is Laser:
+		area.queue_free()
+		queue_free()

@@ -1,10 +1,11 @@
 extends Node
 
 const LASER_SCENE = preload("res://Scenes/laser.tscn")
+@onready var player: Area2D = $".."
 
 var can_shoot = true
 func _process(delta):
-	if Input.is_action_just_pressed("shoot") and can_shoot:
+	if Input.is_action_just_pressed("shoot") and can_shoot and player.visible:
 		can_shoot = false
 		var laser = LASER_SCENE.instantiate() as Area2D
 		laser.global_position = get_parent().global_position - Vector2(0, 20)

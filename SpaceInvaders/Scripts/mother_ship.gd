@@ -2,6 +2,7 @@ extends Area2D
 signal killed(score)
 
 const ROCKET_SCENE = preload("res://Scenes/rocket.tscn")
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var speed = 200
 
@@ -16,10 +17,14 @@ func _process(delta: float) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area is Laser:
 		emit_signal("killed", 100);
+		animation_player.play('destroy')
 		area.queue_free()
-		queue_free()
 
 func _on_mother_ship_shot_timer_timeout() -> void:
 	var rocket = ROCKET_SCENE.instantiate() as Area2D
 	rocket.global_position = position + Vector2(0, 20)
 	add_sibling(rocket)
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == 'destroy':
+		queue_free()

@@ -1,7 +1,8 @@
 extends Area2D
 
-@export var game_over = 0
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+@export var game_over = 0
 var speed = 400
 var screen_size
 var x_limit = 30
@@ -13,6 +14,8 @@ func _ready():
 
 func _process(delta):
 	if game_over: return
+	if !visible: return
+
 	var velocity = Vector2.ZERO
 	
 	if Input.is_action_pressed("left"):
@@ -28,5 +31,13 @@ func _process(delta):
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Rocket:
-		killed.emit()
+		animation_player.play("destroy")
 		area.queue_free()
+
+	if area is Enemy:
+		killed.emit(true)
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == 'destroy':
+		animation_player.play("RESET")
+		killed.emit(false)

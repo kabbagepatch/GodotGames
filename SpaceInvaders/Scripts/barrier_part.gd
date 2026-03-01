@@ -17,3 +17,6 @@ func _on_area_entered(area: Area2D) -> void:
 			sprite.texture = sprite_array[damage - 1]
 		else:
 			queue_free()
+	
+	if area is Enemy:
+		queue_free()

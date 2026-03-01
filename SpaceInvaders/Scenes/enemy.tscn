@@ -1,9 +1,114 @@
 [gd_scene format=3 uid="uid://y2e4u0w6beq2"]
 
 [ext_resource type="Script" uid="uid://236b7nugbgok" path="res://Scripts/enemy.gd" id="1_1f0kj"]
+[ext_resource type="Texture2D" uid="uid://c1wsx1fjk0uh3" path="res://Assets/Invaders/Crab-1.png" id="2_1dp5w"]
+[ext_resource type="Texture2D" uid="uid://dinyioeav2pt0" path="res://Assets/Invaders/Crab-2.png" id="3_auwsv"]
+[ext_resource type="Texture2D" uid="uid://r3l6wjqfu2w3" path="res://Assets/Invaders/Octopus-.png" id="4_8uf12"]
+[ext_resource type="Texture2D" uid="uid://cjvq7no6gsew6" path="res://Assets/Invaders/Invader-explosion-1.png" id="4_po0sg"]
+[ext_resource type="Texture2D" uid="uid://ccmuit34nffat" path="res://Assets/Invaders/Invader-explosion-2.png" id="5_haro7"]
+[ext_resource type="Texture2D" uid="uid://cp8wb5v43v6qj" path="res://Assets/Invaders/Octopus-1.png" id="5_po0sg"]
+[ext_resource type="Texture2D" uid="uid://cxbr323emgvjs" path="res://Assets/Invaders/Squid-1.png" id="6_haro7"]
+[ext_resource type="Texture2D" uid="uid://cgqxe2xg6mi3v" path="res://Assets/Invaders/Squid-2.png" id="7_56vhr"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hghv2"]
-load_path = "res://.godot/imported/Octopus-1.png-029b4bf7f64da358272d54e6c67fb390.ctex"
+[sub_resource type="Animation" id="Animation_ta2yt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture:load_path")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["res://.godot/imported/Octopus-1.png-029b4bf7f64da358272d54e6c67fb390.ctex"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_m4x7e"]
+resource_name = "crab_movement"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_1dp5w"), ExtResource("3_auwsv")]
+}
+
+[sub_resource type="Animation" id="Animation_56vhr"]
+resource_name = "destroy"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("4_po0sg"), ExtResource("5_haro7")]
+}
+
+[sub_resource type="Animation" id="Animation_vt4ob"]
+resource_name = "octopus_movement"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("4_8uf12"), ExtResource("5_po0sg")]
+}
+
+[sub_resource type="Animation" id="Animation_hgeoe"]
+resource_name = "squid_movement"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("6_haro7"), ExtResource("7_56vhr")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tk7xo"]
+_data = {
+&"RESET": SubResource("Animation_ta2yt"),
+&"crab_movement": SubResource("Animation_m4x7e"),
+&"destroy": SubResource("Animation_56vhr"),
+&"octopus_movement": SubResource("Animation_vt4ob"),
+&"squid_movement": SubResource("Animation_hgeoe")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hghv2"]
 size = Vector2(10, 8)
@@ -32,16 +137,19 @@ script = ExtResource("1_1f0kj")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1001070544]
 texture_filter = 1
-texture = SubResource("CompressedTexture2D_hghv2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=770342976]
+libraries/ = SubResource("AnimationLibrary_tk7xo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=864430226]
 shape = SubResource("RectangleShape2D_hghv2")
 
 [node name="MovementTimer" type="Timer" parent="." unique_id=1135554550]
-wait_time = 0.4
+wait_time = 0.188
 autostart = true
 
 [node name="EnemyShot" type="Node" parent="." unique_id=622047740]
 script = SubResource("GDScript_hghv2")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

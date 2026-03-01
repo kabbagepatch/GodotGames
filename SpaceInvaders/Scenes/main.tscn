@@ -15,7 +15,6 @@ scale = Vector2(4, 4)
 [node name="HUD" parent="." unique_id=2048825314 instance=ExtResource("3_8gbba")]
 
 [node name="EnemyShotTimer" type="Timer" parent="." unique_id=714279839]
-wait_time = 2.0
 autostart = true
 
 [node name="PlayerRespawnTimer" type="Timer" parent="." unique_id=78684575]

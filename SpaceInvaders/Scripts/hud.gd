@@ -16,7 +16,9 @@ func update_lives(lives):
 	if lives == 0:
 		life_3.hide()
 
-func show_message():
+func show_message(score = 0):
+	if score:
+		message.text = 'YOU WIN!'
 	message.show()
 
 func hide_message():

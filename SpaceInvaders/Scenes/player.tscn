@@ -3,9 +3,49 @@
 [ext_resource type="Script" uid="uid://bbpjwahm6sc67" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://7thdeskrquo" path="res://Assets/Player/Player.png" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://bwxjbcfwq2grm" path="res://Scripts/laser_shot.gd" id="3_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://swtpcguceba0" path="res://Assets/Player/Player-explosion1.png" id="4_x3wgy"]
+[ext_resource type="Texture2D" uid="uid://b656dj2o0haqm" path="res://Assets/Player/Player-explosion2.png" id="5_3smsa"]
+[ext_resource type="Texture2D" uid="uid://d1o6ooum7c1su" path="res://Assets/Player/Player-explosion3.png" id="6_8erm5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6t5aa"]
 size = Vector2(12, 6)
+
+[sub_resource type="Animation" id="Animation_f1ek2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_v0iea")]
+}
+
+[sub_resource type="Animation" id="Animation_tx1dd"]
+resource_name = "destroy"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_x3wgy"), ExtResource("5_3smsa"), ExtResource("6_8erm5")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gymyn"]
+_data = {
+&"RESET": SubResource("Animation_f1ek2"),
+&"destroy": SubResource("Animation_tx1dd")
+}
 
 [node name="Player" type="Area2D" unique_id=1434354619]
 collision_layer = 2
@@ -24,4 +64,8 @@ shape = SubResource("RectangleShape2D_6t5aa")
 [node name="LaserShot" type="Node" parent="." unique_id=526225873]
 script = ExtResource("3_6t5aa")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2005399808]
+libraries/ = SubResource("AnimationLibrary_gymyn")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

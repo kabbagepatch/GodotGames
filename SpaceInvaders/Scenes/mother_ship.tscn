@@ -2,9 +2,47 @@
 
 [ext_resource type="Texture2D" uid="uid://r5imkdignbjf" path="res://Assets/Ufo/Ufo.png" id="1_55bxm"]
 [ext_resource type="Script" uid="uid://y3fuemp8qh47" path="res://Scripts/mother_ship.gd" id="2_shush"]
+[ext_resource type="Texture2D" uid="uid://bxq3uwxxfcsa8" path="res://Assets/Ufo/Ufo-explosion.png" id="3_4gswj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_shush"]
 size = Vector2(16, 6)
+
+[sub_resource type="Animation" id="Animation_itvag"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_55bxm")]
+}
+
+[sub_resource type="Animation" id="Animation_itqi5"]
+resource_name = "destroy"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_55bxm"), ExtResource("3_4gswj")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kt502"]
+_data = {
+&"RESET": SubResource("Animation_itvag"),
+&"destroy": SubResource("Animation_itqi5")
+}
 
 [node name="MotherShip" type="Area2D" unique_id=241914707]
 script = ExtResource("2_shush")
@@ -19,5 +57,9 @@ shape = SubResource("RectangleShape2D_shush")
 [node name="MotherShipShotTimer" type="Timer" parent="." unique_id=1835563185]
 autostart = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1360657548]
+libraries/ = SubResource("AnimationLibrary_kt502")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="MotherShipShotTimer" to="." method="_on_mother_ship_shot_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
