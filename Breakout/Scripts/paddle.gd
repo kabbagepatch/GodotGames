@@ -1,8 +1,9 @@
 extends Area2D
 
-var speed = 400
+var speed = 450
 var screen_size
-const WIDTH = 48
+const WIDTH = 32 * 3
+@onready var ball: Area2D = $"../Ball"
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
@@ -18,4 +19,12 @@ func _process(delta: float) -> void:
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 	position += velocity * delta
-	position = position.clamp(Vector2(WIDTH, 0), Vector2(screen_size.x - WIDTH, screen_size.y))
+	position = position.clamp(Vector2(WIDTH / 2, 0), Vector2(screen_size.x - WIDTH / 2, screen_size.y))
+
+func _on_area_entered(area: Area2D) -> void:
+	ball.velocity.y = -1 * ball.velocity.y
+	ball.velocity.x = (ball.position.x - position.x) / ((WIDTH - 10) / 2)
+	#if position.x > ball.position.x:
+		#ball.velocity.x = -1
+	#if position.x < ball.position.x:
+		#ball.velocity.x = 1

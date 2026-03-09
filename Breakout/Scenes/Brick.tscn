@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://be6m7brci0ic2"]
+
+[ext_resource type="Script" uid="uid://bs3b3yvdfe3o4" path="res://Scripts/brick.gd" id="1_lskvi"]
+[ext_resource type="Texture2D" uid="uid://bdojyt3fgwsca" path="res://Assets/Bricks.png" id="1_w0hh0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lskvi"]
+size = Vector2(32, 16)
+
+[node name="Brick" type="Area2D" unique_id=1042380776]
+scale = Vector2(2, 2)
+collision_layer = 2
+script = ExtResource("1_lskvi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1152875027]
+texture_filter = 1
+texture = ExtResource("1_w0hh0")
+region_enabled = true
+region_rect = Rect2(112, 16, 32, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=470452644]
+shape = SubResource("RectangleShape2D_lskvi")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
