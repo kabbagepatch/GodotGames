@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://h2pgyrqw1c8t"]
 
 [ext_resource type="Script" uid="uid://crun2f0dffonk" path="res://Scripts/hud.gd" id="1_jo1ms"]
-[ext_resource type="Texture2D" uid="uid://dsp233k4msfuj" path="res://Assets/PaddlesAndBalls.png" id="1_sd512"]
+[ext_resource type="Texture2D" uid="uid://2mfhqw3wwjd4" path="res://Assets/Hearts.png" id="2_jo1ms"]
 
 [node name="HUD" type="CanvasLayer" unique_id=137437595]
 script = ExtResource("1_jo1ms")
@@ -26,24 +26,24 @@ text = "0"
 
 [node name="Life3" type="Sprite2D" parent="." unique_id=1295439146]
 texture_filter = 1
-position = Vector2(1112, 16)
+position = Vector2(1133, 18)
 scale = Vector2(2, 2)
-texture = ExtResource("1_sd512")
+texture = ExtResource("2_jo1ms")
 region_enabled = true
-region_rect = Rect2(64, 23, 32, 9)
+region_rect = Rect2(115, 3, 11, 10)
 
-[node name="Life2" type="Sprite2D" parent="." unique_id=1755142297]
+[node name="Life2" type="Sprite2D" parent="." unique_id=1505489561]
 texture_filter = 1
-position = Vector2(968, 16)
+position = Vector2(1106, 18)
 scale = Vector2(2, 2)
-texture = ExtResource("1_sd512")
+texture = ExtResource("2_jo1ms")
 region_enabled = true
-region_rect = Rect2(64, 23, 32, 9)
+region_rect = Rect2(115, 3, 11, 10)
 
-[node name="Life" type="Sprite2D" parent="." unique_id=1147538205]
+[node name="Life1" type="Sprite2D" parent="." unique_id=656156625]
 texture_filter = 1
-position = Vector2(1040, 16)
+position = Vector2(1079, 18)
 scale = Vector2(2, 2)
-texture = ExtResource("1_sd512")
+texture = ExtResource("2_jo1ms")
 region_enabled = true
-region_rect = Rect2(64, 23, 32, 9)
+region_rect = Rect2(115, 3, 11, 10)

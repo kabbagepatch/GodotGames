@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dsp233k4msfuj" path="res://Assets/PaddlesAndBalls.png" id="1_7nh6h"]
 [ext_resource type="Script" uid="uid://dbf5loj0lobfv" path="res://Scripts/ball.gd" id="1_eb1ap"]
+[ext_resource type="AudioStream" uid="uid://cub0gjnqwqv3n" path="res://Assets/blip.mp3" id="3_27lt3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7nh6h"]
 radius = 3.5
@@ -15,7 +16,10 @@ script = ExtResource("1_eb1ap")
 texture_filter = 1
 texture = ExtResource("1_7nh6h")
 region_enabled = true
-region_rect = Rect2(128, 25, 7, 7)
+region_rect = Rect2(112, 91, 5, 5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=122140326]
 shape = SubResource("CircleShape2D_7nh6h")
+
+[node name="Blip" type="AudioStreamPlayer" parent="." unique_id=1378676670]
+stream = ExtResource("3_27lt3")

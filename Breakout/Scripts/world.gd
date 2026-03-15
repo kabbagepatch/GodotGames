@@ -8,7 +8,7 @@ const BRICK_SCENE = preload("res://Scenes/brick.tscn")
 
 const ROWS = 10
 const COLS = 16
-const START_X = 100
+const START_X = 96
 const START_Y = 100
 const WIDTH = 64
 const HEIGHT = 32
@@ -23,12 +23,19 @@ func _ready() -> void:
 			var brick = BRICK_SCENE.instantiate() as StaticBody2D
 			brick.global_position = Vector2(START_X + WIDTH * j, START_Y + HEIGHT * i)
 			brick.scored.connect(update_score)
+			brick.frame = ((ROWS - i - 1) / 2) * 3
+			if i >= 6:
+				brick.hits = 1
+			elif i >= 4:
+				brick.hits = 2
+			else:
+				brick.hits = 3
 			add_child(brick)
 
 func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_R):
 		get_tree().reload_current_scene()
-	if Input.is_key_pressed(KEY_SPACE):
+	if Input.is_key_pressed(KEY_SPACE) and game_state == 'READY':
 		game_state = 'PLAY'
 		paddle.game_state = 'PLAY'
 		ball.game_state = 'PLAY'
@@ -38,3 +45,21 @@ func _process(delta: float) -> void:
 func update_score(score):
 	total_score += score
 	hud.update_score(total_score)
+
+func _on_ball_life_lost() -> void:
+	lives -= 1
+	paddle.global_position = Vector2(556, 610)
+	ball.global_position = Vector2(576, 595)
+	if lives < 0:
+		hud.update_message('GAME OVER')
+		hud.show_message()
+		ball.queue_free()
+		game_state = 'GAME_OVER'
+		paddle.game_state = 'GAME_OVER'
+		ball.game_state = 'GAME_OVER'
+	else:
+		hud.update_lives(lives)
+		hud.show_message()
+		game_state = 'READY'
+		paddle.game_state = 'READY'
+		ball.game_state = 'READY'

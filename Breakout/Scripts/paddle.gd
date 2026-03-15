@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Paddle
 
 var game_state = 'READY'
-var speed = 450
+var speed = 500
 var screen_size
 const WIDTH = 32 * 3
 
