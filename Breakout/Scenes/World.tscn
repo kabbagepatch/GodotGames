@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b4yqt20fg36v4" path="res://Scenes/Paddle.tscn" id="1_5cjrv"]
 [ext_resource type="Script" uid="uid://qrbyqvcjr5s7" path="res://Scripts/world.gd" id="1_5nsto"]
 [ext_resource type="PackedScene" uid="uid://bwthlo64pi2gx" path="res://Scenes/Ball.tscn" id="2_j0p05"]
+[ext_resource type="PackedScene" uid="uid://h2pgyrqw1c8t" path="res://Scenes/hud.tscn" id="4_gjpho"]
 
 [node name="World" type="Node2D" unique_id=1829728859]
 script = ExtResource("1_5nsto")
@@ -13,4 +14,4 @@ position = Vector2(596, 610)
 [node name="Ball" parent="." unique_id=48664694 instance=ExtResource("2_j0p05")]
 position = Vector2(622, 595)
 
-[connection signal="area_entered" from="Ball" to="Paddle" method="_on_ball_area_entered"]
+[node name="HUD" parent="." unique_id=137437595 instance=ExtResource("4_gjpho")]

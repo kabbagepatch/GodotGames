@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8wypp"]
 size = Vector2(32, 9)
 
-[node name="Paddle" type="Area2D" unique_id=1293632071]
+[node name="Paddle" type="CharacterBody2D" unique_id=1770605586]
 scale = Vector2(3, 2)
 script = ExtResource("1_1u0e0")
 
@@ -18,5 +18,3 @@ region_rect = Rect2(64, 39, 32, 8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=569247254]
 shape = SubResource("RectangleShape2D_8wypp")
-
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]

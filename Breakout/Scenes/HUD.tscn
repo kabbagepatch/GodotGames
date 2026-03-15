@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://h2pgyrqw1c8t"]
+
+[ext_resource type="Script" uid="uid://crun2f0dffonk" path="res://Scripts/hud.gd" id="1_jo1ms"]
+[ext_resource type="Texture2D" uid="uid://dsp233k4msfuj" path="res://Assets/PaddlesAndBalls.png" id="1_sd512"]
+
+[node name="HUD" type="CanvasLayer" unique_id=137437595]
+script = ExtResource("1_jo1ms")
+
+[node name="Message" type="Label" parent="." unique_id=1893463385]
+offset_top = 272.0
+offset_right = 1152.0
+offset_bottom = 368.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "HIT SPACE TO START"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="." unique_id=486113707]
+offset_left = 8.0
+offset_right = 64.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="Life3" type="Sprite2D" parent="." unique_id=1295439146]
+texture_filter = 1
+position = Vector2(1112, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("1_sd512")
+region_enabled = true
+region_rect = Rect2(64, 23, 32, 9)
+
+[node name="Life2" type="Sprite2D" parent="." unique_id=1755142297]
+texture_filter = 1
+position = Vector2(968, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("1_sd512")
+region_enabled = true
+region_rect = Rect2(64, 23, 32, 9)
+
+[node name="Life" type="Sprite2D" parent="." unique_id=1147538205]
+texture_filter = 1
+position = Vector2(1040, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("1_sd512")
+region_enabled = true
+region_rect = Rect2(64, 23, 32, 9)
