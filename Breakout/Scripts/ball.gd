@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
 signal life_lost
+
 @onready var blip: AudioStreamPlayer = $Blip
 
 var game_state = 'READY'
-var speed = 3
+@export var speed = 3
 var screen_size
 const PADDLE_WIDTH = 32 * 3
 

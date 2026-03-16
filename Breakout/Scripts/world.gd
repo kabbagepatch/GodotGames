@@ -50,16 +50,17 @@ func _on_ball_life_lost() -> void:
 	lives -= 1
 	paddle.global_position = Vector2(556, 610)
 	ball.global_position = Vector2(576, 595)
+	ball.speed = 3
 	if lives < 0:
 		hud.update_message('GAME OVER')
-		hud.show_message()
 		ball.queue_free()
 		game_state = 'GAME_OVER'
 		paddle.game_state = 'GAME_OVER'
 		ball.game_state = 'GAME_OVER'
 	else:
 		hud.update_lives(lives)
-		hud.show_message()
 		game_state = 'READY'
 		paddle.game_state = 'READY'
 		ball.game_state = 'READY'
+
+	hud.show_message()
