@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://h2pgyrqw1c8t" path="res://Scenes/HUD.tscn" id="4_gjpho"]
 [ext_resource type="Script" uid="uid://claiyv86kl6h" path="res://Scripts/left_wall.gd" id="5_p70al"]
 [ext_resource type="AudioStream" uid="uid://bxt4g25ppaxxf" path="res://Assets/GameAudio2.mp3" id="6_45d1s"]
+[ext_resource type="AudioStream" uid="uid://kugec87wjqgy" path="res://Assets/life_lost.mp3" id="7_q2d71"]
+[ext_resource type="PackedScene" uid="uid://c5elryp0kyb21" path="res://Scenes/Menu.tscn" id="7_y7y61"]
+[ext_resource type="AudioStream" uid="uid://byx12u3vwu3y8" path="res://Assets/game_over.mp3" id="9_uo7di"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gjpho"]
 size = Vector2(2, 648)
@@ -48,10 +51,25 @@ offset_bottom = 648.0
 position = Vector2(1153, 324)
 shape = SubResource("RectangleShape2D_gjpho")
 
+[node name="Menu" parent="." unique_id=544389720 instance=ExtResource("7_y7y61")]
+z_index = 1000
+offset_left = 556.0
+offset_top = 348.0
+offset_right = 556.0
+offset_bottom = 348.0
+
 [node name="GameAudio" type="AudioStreamPlayer" parent="." unique_id=1356374631]
 stream = ExtResource("6_45d1s")
 volume_db = -20.0
 autoplay = true
 parameters/looping = false
 
+[node name="LifeLost" type="AudioStreamPlayer" parent="." unique_id=1004407279]
+stream = ExtResource("7_q2d71")
+volume_db = -15.0
+
+[node name="GameOver" type="AudioStreamPlayer" parent="." unique_id=397071790]
+stream = ExtResource("9_uo7di")
+
 [connection signal="life_lost" from="Ball" to="." method="_on_ball_life_lost"]
+[connection signal="start_game" from="Menu" to="." method="_on_menu_start_game"]

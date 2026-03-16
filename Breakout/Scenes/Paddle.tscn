@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://3vx1r8v44m13" path="res://Scripts/paddle.gd" id="1_1u0e0"]
 [ext_resource type="Texture2D" uid="uid://dsp233k4msfuj" path="res://Assets/PaddlesAndBalls.png" id="1_8wypp"]
+[ext_resource type="AudioStream" uid="uid://duhg07jicer1f" path="res://Assets/powerup.mp3" id="3_5eqp2"]
+[ext_resource type="AudioStream" uid="uid://dthod1rfwkauk" path="res://Assets/powerdown.mp3" id="4_ncdwn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8wypp"]
 size = Vector2(32, 9)
@@ -34,6 +36,12 @@ shape = SubResource("RectangleShape2D_1u0e0")
 [node name="PowerupTimer" type="Timer" parent="." unique_id=532272575]
 wait_time = 10.0
 one_shot = true
+
+[node name="PowerUpSound" type="AudioStreamPlayer" parent="." unique_id=108456069]
+stream = ExtResource("3_5eqp2")
+
+[node name="PowerDownSound" type="AudioStreamPlayer" parent="." unique_id=578790554]
+stream = ExtResource("4_ncdwn")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="PowerupTimer" to="." method="_on_powerup_timer_timeout"]

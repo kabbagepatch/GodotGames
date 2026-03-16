@@ -2,6 +2,8 @@ extends CharacterBody2D
 class_name Paddle
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var powerup_timer: Timer = $PowerupTimer
+@onready var power_up_sound: AudioStreamPlayer = $PowerUpSound
+@onready var power_down_sound: AudioStreamPlayer = $PowerDownSound
 
 var game_state = 'READY'
 var speed = 500
@@ -32,10 +34,12 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			scale.x += 1
 			width = 32 * scale.x
 			sprite_2d.frame += 2
+		power_up_sound.play()
 		powerup_timer.start()
 		area.queue_free()
 
 func _on_powerup_timer_timeout() -> void:
+	power_down_sound.play()
 	scale.x -= 1
 	width = 32 * scale.x
 	sprite_2d.frame -= 2

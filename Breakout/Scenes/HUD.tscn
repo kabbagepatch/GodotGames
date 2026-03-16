@@ -7,6 +7,7 @@
 script = ExtResource("1_jo1ms")
 
 [node name="Message" type="Label" parent="." unique_id=1893463385]
+z_index = 1
 offset_top = 272.0
 offset_right = 1152.0
 offset_bottom = 368.0
