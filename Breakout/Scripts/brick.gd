@@ -8,7 +8,7 @@ const POWERUP = preload("uid://b47sc3wa0yolt")
 
 @export var frame: int
 @export var hits: int
-var score = 20
+@export var score = 20
 var rng
 
 func _ready():

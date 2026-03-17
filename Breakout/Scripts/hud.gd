@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @onready var score: Label = $Score
+@onready var score_message: Label = $ScoreMessage
 @onready var message: Label = $Message
 @onready var life_1: Sprite2D = $Life1
 @onready var life_2: Sprite2D = $Life2
@@ -24,3 +25,18 @@ func show_message():
 
 func hide_message():
 	message.hide()
+
+func show_score_message(total_score, rank):
+	var msg
+	if rank == -1:
+		msg = "Score: %d" % total_score
+	else:
+		if rank == 1:
+			msg = "New High Score: %d!" % total_score
+		else:
+			msg = "You placed #%d: %d!" % [rank, total_score]
+	score_message.text = msg
+	score_message.show()
+
+func hide_score_message():
+	score_message.hide()

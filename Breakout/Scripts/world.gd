@@ -23,16 +23,20 @@ var total_score = 0
 func _ready() -> void:
 	ball.hide()
 	hud.hide_message()
+	hud.hide_score_message()
 
 func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_R):
 		get_tree().reload_current_scene()
-	if Input.is_key_pressed(KEY_SPACE) and game_state == 'READY':
-		game_state = 'PLAY'
-		paddle.game_state = 'PLAY'
-		ball.game_state = 'PLAY'
-		ball.velocity = Vector2(1, -1)
-		hud.hide_message()
+	if Input.is_key_pressed(KEY_SPACE):
+		if game_state == 'READY':
+			game_state = 'PLAY'
+			paddle.game_state = 'PLAY'
+			ball.game_state = 'PLAY'
+			ball.velocity = Vector2(1, -1)
+			hud.hide_message()
+		elif game_state == 'GAME_OVER':
+			get_tree().reload_current_scene()
 
 func _on_menu_start_game() -> void:
 	ball.show()
@@ -50,8 +54,10 @@ func _on_menu_start_game() -> void:
 			if i >= 6:
 				brick.hits = 1
 			elif i >= 4:
+				brick.score = 25
 				brick.hits = 2
 			else:
+				brick.score = 30
 				brick.hits = 3
 			add_child(brick)
 
@@ -61,13 +67,15 @@ func update_score(score):
 
 func _on_ball_life_lost() -> void:
 	lives -= 1
+	update_score(-50)
 	paddle.global_position = Vector2(556, 610)
 	ball.global_position = Vector2(576, 595)
 	ball.speed = 3
 	if lives < 0:
+		var rank = Highscores.save_high_scores(total_score)
+		hud.show_score_message(total_score, rank)
 		game_over.play()
 		hud.update_message('GAME OVER')
-		ball.queue_free()
 		game_state = 'GAME_OVER'
 		paddle.game_state = 'GAME_OVER'
 		ball.game_state = 'GAME_OVER'
@@ -79,3 +87,6 @@ func _on_ball_life_lost() -> void:
 		ball.game_state = 'READY'
 
 	hud.show_message()
+
+func _on_paddle_powerup() -> void:
+	update_score(10)

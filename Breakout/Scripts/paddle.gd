@@ -1,5 +1,8 @@
 extends CharacterBody2D
 class_name Paddle
+
+signal powerup
+
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var powerup_timer: Timer = $PowerupTimer
 @onready var power_up_sound: AudioStreamPlayer = $PowerUpSound
@@ -36,6 +39,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			sprite_2d.frame += 2
 		power_up_sound.play()
 		powerup_timer.start()
+		powerup.emit()
 		area.queue_free()
 
 func _on_powerup_timer_timeout() -> void:

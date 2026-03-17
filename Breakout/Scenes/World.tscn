@@ -53,10 +53,15 @@ shape = SubResource("RectangleShape2D_gjpho")
 
 [node name="Menu" parent="." unique_id=544389720 instance=ExtResource("7_y7y61")]
 z_index = 1000
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_left = 556.0
-offset_top = 348.0
+offset_top = 350.0
 offset_right = 556.0
-offset_bottom = 348.0
+offset_bottom = 350.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="GameAudio" type="AudioStreamPlayer" parent="." unique_id=1356374631]
 stream = ExtResource("6_45d1s")
@@ -71,5 +76,6 @@ volume_db = -15.0
 [node name="GameOver" type="AudioStreamPlayer" parent="." unique_id=397071790]
 stream = ExtResource("9_uo7di")
 
+[connection signal="powerup" from="Paddle" to="." method="_on_paddle_powerup"]
 [connection signal="life_lost" from="Ball" to="." method="_on_ball_life_lost"]
 [connection signal="start_game" from="Menu" to="." method="_on_menu_start_game"]
